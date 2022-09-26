@@ -332,13 +332,13 @@ Return the input from the user if succeeded else #f."
          (rofi-sh `("env"
                     ,(string-join
                       (map (lambda (x) (format #f "~a=~s" (car x) (cdr x))) env))
-                    ,(format #f "wofi -dmenu -disable-history -l ~a -i"
+                    ,(format #f "wofi --dmenu --lines ~a -i"
                              (if (list? buttons) (length buttons) 1))
-                    ,(if (and only-match buttons) "-only-match" "")
-                    ,(if (not buttons) "-input /dev/null" "")
-                    ,(if visibility "" "-password")
+                    ,(if (and only-match buttons) "--only-match" "")
+                    ,(if (not buttons) "--input /dev/null" "")
+                    ,(if visibility "" "--password")
                     ,(format #f "-p ~s" prompt)
-                    ,(if message (format #f "-mesg ~s" message) "")))
+                    ,(if message (format #f "--mesg ~s" message) "")))
          (pipe (open-pipe (string-join (concatenate `(,inputs ,rofi-sh))) OPEN_READ))
          (pass (get-string-all pipe))
          (status (close-pipe pipe)))
