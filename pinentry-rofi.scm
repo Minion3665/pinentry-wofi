@@ -332,7 +332,7 @@ Return the input from the user if succeeded else #f."
          (rofi-sh `("env"
                     ,(string-join
                       (map (lambda (x) (format #f "~a=~s" (car x) (cdr x))) env))
-                    ,(format #f "rofi -dmenu -disable-history -l ~a -i"
+                    ,(format #f "wofi -dmenu -disable-history -l ~a -i"
                              (if (list? buttons) (length buttons) 1))
                     ,(if (and only-match buttons) "-only-match" "")
                     ,(if (not buttons) "-input /dev/null" "")
